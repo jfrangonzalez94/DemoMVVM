@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.card_anime_search.view.*
 import marena.gob.ni.demomvvm.Data.Model.AnimeResults
 import marena.gob.ni.demomvvm.R
 
-class AnimeListAdapter(val _Contexto: Context,val AnimeItemClick: (Int) -> Unit): RecyclerView.Adapter<AnimeListAdapter.SearchViewHolder>() {
+class AnimeListAdapter(val _Contexto: Context,val AnimeItemClick: (AnimeResults) -> Unit): RecyclerView.Adapter<AnimeListAdapter.SearchViewHolder>() {
     var AnimeList: List<AnimeResults> = emptyList<AnimeResults>()
 
     fun setData(list: List<AnimeResults>){
@@ -33,7 +33,7 @@ class AnimeListAdapter(val _Contexto: Context,val AnimeItemClick: (Int) -> Unit)
         holder.itemView.txt_titulo.text = "${Anime.title}"
         holder.itemView.txt_sinop.text = "${Anime.synopsis}"
 
-        holder.itemView.setOnClickListener { AnimeItemClick(position + 1) }
+        holder.itemView.setOnClickListener { AnimeItemClick(Anime) }
     }
 
     class SearchViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)

@@ -16,7 +16,6 @@ class AnimeList : AppCompatActivity() {
 
     private lateinit var viewModel: AnimeListViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,20 +26,18 @@ class AnimeList : AppCompatActivity() {
     }
 
     private fun initUI() {
-        animelistRecyclerView.layoutManager = LinearLayoutManager(this)
-        animelistRecyclerView.adapter = AnimeListAdapter(this) {
-            /*
-            val intent = Intent(this, AnimeInfoActivity::class.java)
-            intent.putExtra("id", it)
-            startActivity(intent)
-            */
-            Toast.makeText(this, "Anime: $it", Toast.LENGTH_LONG).show()
-        }
 
-        viewModel.getAnimeList()
+        viewModel.getAPIAnimeList()
 
         viewModel.AnimeList.observe(this, Observer {
             (animelistRecyclerView.adapter as AnimeListAdapter).setData(it)
         })
+
+        animelistRecyclerView.layoutManager = LinearLayoutManager(this)
+        animelistRecyclerView.adapter = AnimeListAdapter(this) {
+            Toast.makeText(this, "Anime: ${it.title}", Toast.LENGTH_LONG).show()
+        }
+
+
     }
 }
